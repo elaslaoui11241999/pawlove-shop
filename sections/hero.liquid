@@ -1,0 +1,56 @@
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">🐾 {{ section.settings.tag }}</div>
+    <h1 class="hero-h1">
+      {{ section.settings.heading_1 }}<br>
+      {{ section.settings.heading_2 }}<br>
+      <span class="italic">{{ section.settings.heading_3 }}</span>
+    </h1>
+    <p class="hero-desc">{{ section.settings.description }}</p>
+    <div class="hero-btns">
+      <a href="{{ section.settings.btn1_url }}" class="btn btn-o">{{ section.settings.btn1_text }} 🐾</a>
+      <a href="{{ section.settings.btn2_url }}" class="btn btn-w">{{ section.settings.btn2_text }}</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-stars">★★★★★</div>
+      <div class="trust-text"><strong>{{ section.settings.rating }}</strong> · {{ section.settings.rating_text }}</div>
+    </div>
+    <div style="margin-top:24px">
+      <span class="handwrite">{{ section.settings.handwrite }}</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-blob"></div>
+    <div class="hero-emoji-field">
+      <span style="top:10%;left:10%;--d:7s;--dl:0s">🦴</span>
+      <span style="top:15%;right:15%;--d:5s;--dl:.5s">⭐</span>
+      <span style="top:70%;left:8%;--d:8s;--dl:1s">🎾</span>
+      <span style="top:75%;right:10%;--d:6s;--dl:.3s">💕</span>
+      <span style="top:40%;left:5%;--d:9s;--dl:.8s">🌿</span>
+      <span style="top:50%;right:5%;--d:7s;--dl:1.2s">✨</span>
+    </div>
+    <div class="hero-main-emoji">{{ section.settings.main_emoji }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "La tienda que tus mascotas merecen" },
+    { "type": "text", "id": "heading_1", "label": "Título línea 1", "default": "Todo el amor" },
+    { "type": "text", "id": "heading_2", "label": "Título línea 2", "default": "para tu" },
+    { "type": "text", "id": "heading_3", "label": "Título línea 3 (cursiva)", "default": "mascota" },
+    { "type": "textarea", "id": "description", "label": "Descripción", "default": "Productos premium para perros, gatos, pájaros, conejos y más. Porque ellos lo dan todo, merecen lo mejor." },
+    { "type": "text", "id": "btn1_text", "label": "Botón 1 texto", "default": "Ver productos" },
+    { "type": "url", "id": "btn1_url", "label": "Botón 1 enlace" },
+    { "type": "text", "id": "btn2_text", "label": "Botón 2 texto", "default": "Explorar categorías" },
+    { "type": "url", "id": "btn2_url", "label": "Botón 2 enlace" },
+    { "type": "text", "id": "rating", "label": "Valoración", "default": "4.9/5" },
+    { "type": "text", "id": "rating_text", "label": "Texto valoración", "default": "Más de 5.000 clientes felices" },
+    { "type": "text", "id": "handwrite", "label": "Texto manuscrito", "default": "¡Tu mascota te lo agradecerá! 🐶" },
+    { "type": "text", "id": "main_emoji", "label": "Emoji principal", "default": "🐶" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

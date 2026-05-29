@@ -1,0 +1,25 @@
+<div class="nl ra" id="contacto">
+  <h2 class="nl-h">{{ section.settings.heading_1 }}<br><span>{{ section.settings.heading_2 }}</span> 🐾</h2>
+  <p class="nl-s">{{ section.settings.subtext }}</p>
+  {% form 'customer', id: 'nl-form' %}
+    <div class="nl-form">
+      <input class="nl-in" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required>
+      <button type="submit" class="nl-btn">🐾 {{ section.settings.btn_text }}</button>
+    </div>
+    <input type="hidden" name="contact[tags]" value="newsletter">
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading_1", "label": "Título línea 1", "default": "Únete a la familia" },
+    { "type": "text", "id": "heading_2", "label": "Título línea 2 (naranja)", "default": "PawLove" },
+    { "type": "text", "id": "subtext", "label": "Subtexto", "default": "Recibe ofertas exclusivas, consejos para tu mascota y novedades antes que nadie" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder email", "default": "tu@email.com" },
+    { "type": "text", "id": "btn_text", "label": "Texto botón", "default": "Suscribirme" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

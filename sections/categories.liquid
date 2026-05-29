@@ -1,0 +1,47 @@
+<div id="categorias" style="background:var(--cream)">
+  <div class="sec ra">
+    <div class="sec-lbl">Explora por animal</div>
+    <h2 class="sec-h">Encuentra lo que<br>necesita tu <span>compañero</span></h2>
+    <div class="cat-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.url }}" class="cat" {{ block.shopify_attributes }}>
+          <div class="cat-ico">{{ block.settings.emoji }}</div>
+          <div class="cat-nm">{{ block.settings.name }}</div>
+          <div class="cat-n">{{ block.settings.count }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Categorías",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🐶" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Perros" },
+        { "type": "text", "id": "count", "label": "Cantidad", "default": "80+ productos" },
+        { "type": "url", "id": "url", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorías",
+      "blocks": [
+        { "type": "category", "settings": { "emoji": "🐶", "name": "Perros", "count": "80+ productos" } },
+        { "type": "category", "settings": { "emoji": "🐱", "name": "Gatos", "count": "65+ productos" } },
+        { "type": "category", "settings": { "emoji": "🐦", "name": "Pájaros", "count": "30+ productos" } },
+        { "type": "category", "settings": { "emoji": "🐹", "name": "Roedores", "count": "24+ productos" } },
+        { "type": "category", "settings": { "emoji": "🐇", "name": "Conejos", "count": "18+ productos" } },
+        { "type": "category", "settings": { "emoji": "🐠", "name": "Peces", "count": "22+ productos" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

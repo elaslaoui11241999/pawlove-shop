@@ -1,0 +1,33 @@
+<div id="ofertas">
+  <div class="promo-banner ra">
+    <div>
+      <div class="promo-lbl">{{ section.settings.label }}</div>
+      <div class="promo-h">{{ section.settings.heading_1 }}<br>con <span>{{ section.settings.heading_2 }}</span></div>
+      <a href="{{ section.settings.btn_url }}" class="btn btn-o" style="margin-top:24px">{{ section.settings.btn_text }} →</a>
+    </div>
+    <div class="promo-pct">{{ section.settings.discount_pct }}<small>{{ section.settings.discount_label }}</small></div>
+    <div class="promo-code-box">
+      <div class="promo-code-lbl">Usa el código</div>
+      <div class="promo-code">{{ section.settings.code }}</div>
+      <div class="promo-code-desc">{{ section.settings.code_desc }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner promo",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Etiqueta", "default": "Oferta de bienvenida ✨" },
+    { "type": "text", "id": "heading_1", "label": "Título línea 1", "default": "Tu primera compra" },
+    { "type": "text", "id": "heading_2", "label": "Título línea 2 (naranja)", "default": "descuento" },
+    { "type": "text", "id": "btn_text", "label": "Texto botón", "default": "Comprar ahora" },
+    { "type": "url", "id": "btn_url", "label": "Enlace botón" },
+    { "type": "text", "id": "discount_pct", "label": "Porcentaje descuento", "default": "10%" },
+    { "type": "text", "id": "discount_label", "label": "Texto bajo porcentaje", "default": "de descuento" },
+    { "type": "text", "id": "code", "label": "Código descuento", "default": "PAWLOVE10" },
+    { "type": "text", "id": "code_desc", "label": "Descripción código", "default": "En tu primera compra · Sin mínimo" }
+  ],
+  "presets": [{ "name": "Banner promo" }]
+}
+{% endschema %}

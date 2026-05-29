@@ -1,0 +1,58 @@
+<footer>
+  <div class="foot-g">
+    <div>
+      <div class="foot-logo">Paw<span>Love</span> 🐾</div>
+      <p class="foot-p">{{ section.settings.tagline }}</p>
+      <div class="socials" style="margin-top:20px">
+        {% if section.settings.twitter != blank %}<a href="{{ section.settings.twitter }}">𝕏</a>{% endif %}
+        {% if section.settings.instagram != blank %}<a href="{{ section.settings.instagram }}">📸</a>{% endif %}
+        {% if section.settings.youtube != blank %}<a href="{{ section.settings.youtube }}">▶️</a>{% endif %}
+        {% if section.settings.whatsapp != blank %}<a href="{{ section.settings.whatsapp }}">💬</a>{% endif %}
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="{{ routes.root_url }}">Inicio</a></li>
+        <li><a href="{{ routes.collections_url }}">Productos</a></li>
+        <li><a href="#ofertas">Ofertas</a></li>
+        <li><a href="#productos">Novedades</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="{{ pages['envios'].url | default: '#' }}">Envíos</a></li>
+        <li><a href="{{ pages['devoluciones'].url | default: '#' }}">Devoluciones</a></li>
+        <li><a href="{{ pages['faq'].url | default: '#' }}">FAQ</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="{{ pages['privacidad'].url | default: '#' }}">Privacidad</a></li>
+        <li><a href="{{ pages['terminos'].url | default: '#' }}">Términos</a></li>
+        <li><a href="{{ pages['cookies'].url | default: '#' }}">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© {{ 'now' | date: '%Y' }} PawLove. Todos los derechos reservados.</span>
+    <span style="color:rgba(232,104,42,.4)">🐾 Hecho con amor para las mascotas</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Descripción", "default": "La tienda de confianza para los que aman a sus mascotas. Productos premium, precios justos y mucho amor." },
+    { "type": "url", "id": "twitter", "label": "Twitter/X URL" },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "youtube", "label": "YouTube URL" },
+    { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

@@ -1,0 +1,26 @@
+<nav>
+  <a href="{{ routes.root_url }}" class="logo">
+    <span class="logo-paw">🐾</span>Paw<span>Love</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="ni">🔍</button>
+    <a href="{{ routes.account_url }}" class="ni" style="text-decoration:none">👤</a>
+    <div class="cart-wrap">
+      <a href="{{ routes.cart_url }}" class="ni" style="text-decoration:none">🛒<span class="cbadge">{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Cabecera",
+  "settings": [],
+  "presets": [{ "name": "Cabecera" }]
+}
+{% endschema %}

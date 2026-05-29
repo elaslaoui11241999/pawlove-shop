@@ -1,0 +1,44 @@
+<div id="nosotros" style="background:var(--cream)">
+  <div class="sec ra">
+    <div class="sec-lbl">¿Por qué PawLove?</div>
+    <h2 class="sec-h">Pensado para<br><span>ellos y para ti</span></h2>
+    <div class="why-grid">
+      {% for block in section.blocks %}
+        <div class="why-card" {{ block.shopify_attributes }}>
+          <div class="why-ico">{{ block.settings.emoji }}</div>
+          <div class="why-t">{{ block.settings.title }}</div>
+          <div class="why-d">{{ block.settings.desc }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Por qué nosotros",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Ventaja",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🚀" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Envío rápido" },
+        { "type": "textarea", "id": "desc", "label": "Descripción", "default": "Recibe tu pedido en casa en pocos días." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Por qué nosotros",
+      "blocks": [
+        { "type": "feature", "settings": { "emoji": "🚀", "title": "Envío rápido", "desc": "Recibe tu pedido en casa en pocos días. Gratis en pedidos +40€" } },
+        { "type": "feature", "settings": { "emoji": "🌿", "title": "Productos naturales", "desc": "Seleccionamos productos seguros, naturales y testados por veterinarios" } },
+        { "type": "feature", "settings": { "emoji": "↩️", "title": "30 días devolución", "desc": "Si no queda contento, te devolvemos el dinero sin preguntas" } },
+        { "type": "feature", "settings": { "emoji": "💬", "title": "Soporte experto", "desc": "Nuestro equipo de amantes de mascotas te ayuda siempre que necesites" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

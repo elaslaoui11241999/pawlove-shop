@@ -1,0 +1,28 @@
+<div class="ann">
+  <div class="ann-t">
+    <span>{{ section.settings.msg1 }}</span>
+    <span>{{ section.settings.msg2 }}</span>
+    <span>{{ section.settings.msg3 }}</span>
+    <span>{{ section.settings.msg4 }}</span>
+    <span>{{ section.settings.msg5 }}</span>
+    <span>{{ section.settings.msg1 }}</span>
+    <span>{{ section.settings.msg2 }}</span>
+    <span>{{ section.settings.msg3 }}</span>
+    <span>{{ section.settings.msg4 }}</span>
+    <span>{{ section.settings.msg5 }}</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "settings": [
+    { "type": "text", "id": "msg1", "label": "Mensaje 1", "default": "Envío gratis +40€" },
+    { "type": "text", "id": "msg2", "label": "Mensaje 2", "default": "Devolución 30 días" },
+    { "type": "text", "id": "msg3", "label": "Mensaje 3", "default": "Productos naturales" },
+    { "type": "text", "id": "msg4", "label": "Mensaje 4", "default": "+5.000 mascotas felices" },
+    { "type": "text", "id": "msg5", "label": "Mensaje 5", "default": "Atención 24/7" }
+  ],
+  "presets": [{ "name": "Barra de anuncios" }]
+}
+{% endschema %}

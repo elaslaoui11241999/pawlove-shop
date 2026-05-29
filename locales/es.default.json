@@ -1,0 +1,18 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Acceder con contraseña",
+      "login_form_password_label": "Contraseña",
+      "login_form_password_placeholder": "Tu contraseña",
+      "login_form_submit": "Entrar",
+      "signup_button_text": "Registrarse"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Carrito",
+      "empty": "El carrito está vacío",
+      "checkout": "Tramitar pedido"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<div style="background:var(--warm)">
+  <div class="sec ra">
+    <div class="sec-lbl">Lo que dicen nuestros clientes</div>
+    <h2 class="sec-h">Más de <span>5.000 mascotas</span><br>felices</h2>
+    <div class="rev-grid">
+      {% for block in section.blocks %}
+        <div class="rv" {{ block.shopify_attributes }}>
+          <div class="rv-q">"</div>
+          <div class="rv-stars">{{ block.settings.stars }}</div>
+          <p class="rv-text">{{ block.settings.text }}</p>
+          <div class="rv-author">
+            <div class="rv-av">{{ block.settings.emoji }}</div>
+            <div>
+              <div class="rv-nm">{{ block.settings.name }}</div>
+              <div class="rv-loc">{{ block.settings.location }}</div>
+              <div class="rv-ver">✓ Compra verificada</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Reseñas",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "text", "id": "stars", "label": "Estrellas", "default": "★★★★★" },
+        { "type": "textarea", "id": "text", "label": "Texto reseña", "default": "Excelente producto, muy recomendado." },
+        { "type": "text", "id": "emoji", "label": "Emoji avatar", "default": "🧑" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Cliente" },
+        { "type": "text", "id": "location", "label": "Ciudad · Mascota", "default": "Madrid · Dueño de perro" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reseñas",
+      "blocks": [
+        { "type": "review", "settings": { "stars": "★★★★★", "text": "El recogedor de caca es increíble, muy práctico y ligero. Mi perro y yo lo usamos cada día. Llegó super rápido y bien embalado.", "emoji": "🧑", "name": "Carlos M.", "location": "Madrid · Dueño de Labrador" } },
+        { "type": "review", "settings": { "stars": "★★★★★", "text": "La cama ortopédica para mi gata mayor ha sido un antes y un después. Duerme muchísimo mejor y se nota que le duele menos la cadera.", "emoji": "👩", "name": "Lucía R.", "location": "Barcelona · Dueña de gata senior" } },
+        { "type": "review", "settings": { "stars": "★★★★★", "text": "Los snacks naturales son buenísimos, mi perro los adora y sé que son sanos. El servicio al cliente es excelente, respondieron enseguida.", "emoji": "🧔", "name": "Andreu P.", "location": "Valencia · Dueño de Border Collie" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

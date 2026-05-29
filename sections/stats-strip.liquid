@@ -1,0 +1,25 @@
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div><div class="stat-n">{{ section.settings.stat1_n }}</div><div class="stat-l">{{ section.settings.stat1_l }}</div></div>
+    <div><div class="stat-n">{{ section.settings.stat2_n }}</div><div class="stat-l">{{ section.settings.stat2_l }}</div></div>
+    <div><div class="stat-n">{{ section.settings.stat3_n }}</div><div class="stat-l">{{ section.settings.stat3_l }}</div></div>
+    <div><div class="stat-n">{{ section.settings.stat4_n }}</div><div class="stat-l">{{ section.settings.stat4_l }}</div></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Estadísticas",
+  "settings": [
+    { "type": "text", "id": "stat1_n", "label": "Stat 1 número", "default": "5K+" },
+    { "type": "text", "id": "stat1_l", "label": "Stat 1 etiqueta", "default": "Clientes felices" },
+    { "type": "text", "id": "stat2_n", "label": "Stat 2 número", "default": "200+" },
+    { "type": "text", "id": "stat2_l", "label": "Stat 2 etiqueta", "default": "Productos" },
+    { "type": "text", "id": "stat3_n", "label": "Stat 3 número", "default": "4.9★" },
+    { "type": "text", "id": "stat3_l", "label": "Stat 3 etiqueta", "default": "Valoración media" },
+    { "type": "text", "id": "stat4_n", "label": "Stat 4 número", "default": "30d" },
+    { "type": "text", "id": "stat4_l", "label": "Stat 4 etiqueta", "default": "Devolución gratis" }
+  ],
+  "presets": [{ "name": "Estadísticas" }]
+}
+{% endschema %}
