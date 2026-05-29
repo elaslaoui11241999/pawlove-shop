@@ -1,0 +1,51 @@
+{% section 'header' %}
+
+<div style="background:var(--cream);min-height:60vh">
+  <div class="sec" style="max-width:700px">
+    <div class="sec-lbl">Tu pedido</div>
+    <h1 class="sec-h">Carrito <span>de compra</span></h1>
+
+    {% if cart.item_count == 0 %}
+      <div style="text-align:center;padding:60px 0">
+        <div style="font-size:80px;margin-bottom:20px">🛒</div>
+        <p style="color:var(--gray);font-size:16px;margin-bottom:32px">Tu carrito está vacío</p>
+        <a href="{{ routes.collections_url }}" class="btn btn-o">Ver productos 🐾</a>
+      </div>
+    {% else %}
+      {% form 'cart', cart %}
+        {% for item in cart.items %}
+          <div style="display:flex;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid rgba(61,43,31,.08)">
+            <div style="width:80px;height:80px;background:var(--warm);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0">
+              {% if item.image %}
+                <img src="{{ item.image | img_url: '160x160' }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">
+              {% else %}
+                🐾
+              {% endif %}
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:600;margin-bottom:4px">{{ item.product.title }}</div>
+              <div style="font-size:13px;color:var(--gray)">{{ item.variant.title }}</div>
+              <div style="font-size:18px;font-weight:700;color:var(--brown);margin-top:6px">{{ item.line_price | money }}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:50px;text-align:center;border:1px solid rgba(61,43,31,.2);border-radius:8px;padding:6px;font-size:14px">
+            </div>
+          </div>
+        {% endfor %}
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;flex-wrap:wrap;gap:16px">
+          <div>
+            <div style="font-size:13px;color:var(--gray)">Total</div>
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900">{{ cart.total_price | money }}</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button type="submit" name="update" class="btn btn-w">Actualizar carrito</button>
+            <a href="/checkout" class="btn btn-o">Tramitar pedido →</a>
+          </div>
+        </div>
+      {% endform %}
+    {% endif %}
+  </div>
+</div>
+
+{% section 'footer' %}

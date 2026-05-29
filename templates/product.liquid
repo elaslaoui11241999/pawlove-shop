@@ -1,0 +1,47 @@
+{% section 'header' %}
+
+<div style="background:var(--cream);min-height:60vh">
+  <div class="sec" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
+
+    <div style="background:var(--warm);border-radius:24px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:120px">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover;border-radius:24px">
+      {% else %}
+        🐾
+      {% endif %}
+    </div>
+
+    <div>
+      <div style="font-size:11px;color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">{{ product.type }}</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;margin-bottom:20px">{{ product.title }}</h1>
+
+      <div class="pc-price" style="margin-bottom:20px">
+        <span class="pp-cur" style="font-size:32px">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="pp-old">{{ product.compare_at_price | money }}</span>
+          <span class="pp-save">-{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+        {% endif %}
+      </div>
+
+      <div style="font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:32px">
+        {{ product.description }}
+      </div>
+
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="btn btn-o" style="width:100%;justify-content:center;font-size:15px;padding:18px">
+          🐾 Añadir al carrito — {{ product.price | money }}
+        </button>
+      {% endform %}
+
+      <div style="display:flex;gap:20px;margin-top:24px;flex-wrap:wrap">
+        <span style="font-size:13px;color:var(--gray)">🚀 Envío gratis +40€</span>
+        <span style="font-size:13px;color:var(--gray)">↩️ Devolución 30 días</span>
+        <span style="font-size:13px;color:var(--gray)">🌿 Producto natural</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% section 'footer' %}
