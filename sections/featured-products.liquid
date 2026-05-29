@@ -3,122 +3,165 @@
     <div class="sec-lbl">Los más populares</div>
     <h2 class="sec-h">Productos que <span>encantan</span></h2>
     <div class="prod-grid">
-      {% for block in section.blocks %}
-        <div class="pc" {{ block.shopify_attributes }}>
-          <div class="pc-img">
-            {{ block.settings.emoji }}
-            {% if block.settings.badge != blank %}
-              <div class="pc-badge {{ block.settings.badge_style }}">{{ block.settings.badge }}</div>
-            {% endif %}
-            <button class="pc-wish" onclick="showToast('Guardado en favoritos')">&#x1F90D;</button>
-            <a href="{{ block.settings.url }}" class="pc-add">&#x1F43E; Añadir al carrito</a>
-          </div>
-          <div class="pc-info">
-            <div class="pc-brand">{{ block.settings.brand }}</div>
-            <div class="pc-name">{{ block.settings.product_name }}</div>
-            <div class="pc-price">
-              <span class="pp-cur">{{ block.settings.price }}</span>
-              {% if block.settings.old_price != blank %}
-                <span class="pp-old">{{ block.settings.old_price }}</span>
-                <span class="pp-save">{{ block.settings.discount }}</span>
-              {% endif %}
-            </div>
-            <div class="pc-stars">{{ block.settings.stars }} <span>({{ block.settings.reviews }} reseñas)</span></div>
-          </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          💩
+          <div class="pc-badge b-hot">Más vendido</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
         </div>
-      {% endfor %}
+        <div class="pc-info">
+          <div class="pc-brand">Perros</div>
+          <div class="pc-name">Recogedor de caca portátil con dispensador de bolsas</div>
+          <div class="pc-price">
+            <span class="pp-cur">12,99€</span>
+            <span class="pp-old">19,99€</span>
+            <span class="pp-save">-35%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(248 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🦮
+          <div class="pc-badge b-new">Nuevo</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Perros</div>
+          <div class="pc-name">Arnés antipull ajustable reflectante paseo nocturno</div>
+          <div class="pc-price">
+            <span class="pp-cur">24,99€</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(183 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🐱
+          <div class="pc-badge b-sale">Oferta</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Gatos</div>
+          <div class="pc-name">Rascador tower con plataformas + juguete colgante</div>
+          <div class="pc-price">
+            <span class="pp-cur">34,99€</span>
+            <span class="pp-old">49,99€</span>
+            <span class="pp-save">-30%</span>
+          </div>
+          <div class="pc-stars">★★★★☆ <span>(97 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🍖
+          <div class="pc-badge b-new">Natural</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Perros &amp; Gatos</div>
+          <div class="pc-name">Snacks naturales liofilizados de pollo 100% sin aditivos</div>
+          <div class="pc-price">
+            <span class="pp-cur">8,99€</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(412 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🛁
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Higiene</div>
+          <div class="pc-name">Kit grooming profesional: cepillo, cortaunas y champu natural</div>
+          <div class="pc-price">
+            <span class="pp-cur">29,99€</span>
+            <span class="pp-old">39,99€</span>
+            <span class="pp-save">-25%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(156 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🛏️
+          <div class="pc-badge b-new">Premium</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Descanso</div>
+          <div class="pc-name">Cama ortopedica memory foam lavable antideslizante</div>
+          <div class="pc-price">
+            <span class="pp-cur">44,99€</span>
+            <span class="pp-old">64,99€</span>
+            <span class="pp-save">-31%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(289 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🎾
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Juguetes</div>
+          <div class="pc-name">Set 10 juguetes interactivos dispensadores de premios</div>
+          <div class="pc-price">
+            <span class="pp-cur">18,99€</span>
+          </div>
+          <div class="pc-stars">★★★★☆ <span>(201 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          💧
+          <div class="pc-badge b-hot">Top</div>
+          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Alimentacion</div>
+          <div class="pc-name">Fuente de agua con filtro recirculante silenciosa 2L</div>
+          <div class="pc-price">
+            <span class="pp-cur">22,99€</span>
+            <span class="pp-old">31,99€</span>
+            <span class="pp-save">-28%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(378 reseñas)</span></div>
+        </div>
+      </div>
+
     </div>
     <div style="text-align:center;margin-top:44px">
-      <a href="{{ routes.collections_url }}" class="btn btn-o">Ver todos los productos &#x1F43E;</a>
+      <a href="{{ routes.collections_url }}" class="btn btn-o">Ver todos los productos</a>
     </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Productos destacados",
-  "max_blocks": 8,
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Producto",
-      "settings": [
-        {
-          "type": "text",
-          "id": "emoji",
-          "label": "Emoji del producto",
-          "default": "🐕"
-        },
-        {
-          "type": "text",
-          "id": "badge",
-          "label": "Badge (dejar vacio para ocultar)",
-          "default": ""
-        },
-        {
-          "type": "select",
-          "id": "badge_style",
-          "label": "Color del badge",
-          "options": [
-            { "value": "b-new", "label": "Verde" },
-            { "value": "b-hot", "label": "Naranja" },
-            { "value": "b-sale", "label": "Rosa" }
-          ],
-          "default": "b-new"
-        },
-        {
-          "type": "text",
-          "id": "brand",
-          "label": "Categoria",
-          "default": "Perros"
-        },
-        {
-          "type": "text",
-          "id": "product_name",
-          "label": "Nombre del producto",
-          "default": "Nombre del producto"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Precio actual",
-          "default": "9,99"
-        },
-        {
-          "type": "text",
-          "id": "old_price",
-          "label": "Precio anterior (opcional)",
-          "default": ""
-        },
-        {
-          "type": "text",
-          "id": "discount",
-          "label": "Descuento ej: -30%",
-          "default": ""
-        },
-        {
-          "type": "text",
-          "id": "stars",
-          "label": "Estrellas",
-          "default": "★★★★★"
-        },
-        {
-          "type": "text",
-          "id": "reviews",
-          "label": "Numero de resenas",
-          "default": "100"
-        },
-        {
-          "type": "url",
-          "id": "product_url",
-          "label": "Enlace al producto"
-        }
-      ]
-    }
-  ],
+  "name": "Featured Products",
+  "settings": [],
   "presets": [
     {
-      "name": "Productos destacados"
+      "name": "Featured Products"
     }
   ]
 }
