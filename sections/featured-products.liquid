@@ -10,12 +10,12 @@
             {% if block.settings.badge != blank %}
               <div class="pc-badge {{ block.settings.badge_style }}">{{ block.settings.badge }}</div>
             {% endif %}
-            <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
-            <a href="{{ block.settings.url }}" class="pc-add">🐾 Añadir al carrito</a>
+            <button class="pc-wish" onclick="showToast('Guardado en favoritos')">&#x1F90D;</button>
+            <a href="{{ block.settings.url }}" class="pc-add">&#x1F43E; Añadir al carrito</a>
           </div>
           <div class="pc-info">
             <div class="pc-brand">{{ block.settings.brand }}</div>
-            <div class="pc-name">{{ block.settings.name }}</div>
+            <div class="pc-name">{{ block.settings.product_name }}</div>
             <div class="pc-price">
               <span class="pp-cur">{{ block.settings.price }}</span>
               {% if block.settings.old_price != blank %}
@@ -29,7 +29,7 @@
       {% endfor %}
     </div>
     <div style="text-align:center;margin-top:44px">
-      <a href="{{ routes.collections_url }}" class="btn btn-o">Ver todos los productos 🐾</a>
+      <a href="{{ routes.collections_url }}" class="btn btn-o">Ver todos los productos &#x1F43E;</a>
     </div>
   </div>
 </div>
@@ -43,37 +43,82 @@
       "type": "product",
       "name": "Producto",
       "settings": [
-        { "type": "text", "id": "emoji", "label": "Emoji/imagen", "default": "🐕" },
-        { "type": "text", "id": "badge", "label": "Badge (dejar vacío para ocultar)", "default": "" },
-        { "type": "select", "id": "badge_style", "label": "Color badge", "options": [
-            { "value": "b-new", "label": "Verde (Nuevo)" },
-            { "value": "b-hot", "label": "Naranja (Hot)" },
-            { "value": "b-sale", "label": "Rosa (Oferta)" }
-          ], "default": "b-new" },
-        { "type": "text", "id": "brand", "label": "Categoría", "default": "Perros" },
-        { "type": "text", "id": "name", "label": "Nombre producto", "default": "Producto" },
-        { "type": "text", "id": "price", "label": "Precio", "default": "9,99€" },
-        { "type": "text", "id": "old_price", "label": "Precio anterior (opcional)", "default": "" },
-        { "type": "text", "id": "discount", "label": "Descuento (ej: -30%)", "default": "" },
-        { "type": "text", "id": "stars", "label": "Estrellas", "default": "★★★★★" },
-        { "type": "text", "id": "reviews", "label": "Nº reseñas", "default": "100" },
-        { "type": "url", "id": "url", "label": "Enlace al producto" }
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji del producto",
+          "default": "🐕"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (dejar vacio para ocultar)",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Color del badge",
+          "options": [
+            { "value": "b-new", "label": "Verde" },
+            { "value": "b-hot", "label": "Naranja" },
+            { "value": "b-sale", "label": "Rosa" }
+          ],
+          "default": "b-new"
+        },
+        {
+          "type": "text",
+          "id": "brand",
+          "label": "Categoria",
+          "default": "Perros"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Nombre del producto",
+          "default": "Nombre del producto"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Precio actual",
+          "default": "9,99"
+        },
+        {
+          "type": "text",
+          "id": "old_price",
+          "label": "Precio anterior (opcional)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "Descuento ej: -30%",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Estrellas",
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "reviews",
+          "label": "Numero de resenas",
+          "default": "100"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Enlace al producto"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Productos destacados",
-      "blocks": [
-        { "type": "product", "settings": { "emoji": "💩", "badge": "Más vendido", "badge_style": "b-hot", "brand": "Perros", "name": "Recogedor de caca portátil con dispensador de bolsas", "price": "12,99€", "old_price": "19,99€", "discount": "-35%", "stars": "★★★★★", "reviews": "248" } },
-        { "type": "product", "settings": { "emoji": "🦮", "badge": "Nuevo", "badge_style": "b-new", "brand": "Perros", "name": "Arnés antipull ajustable reflectante paseo nocturno", "price": "24,99€", "stars": "★★★★★", "reviews": "183" } },
-        { "type": "product", "settings": { "emoji": "🐱", "badge": "Oferta", "badge_style": "b-sale", "brand": "Gatos", "name": "Rascador tower con plataformas + juguete colgante", "price": "34,99€", "old_price": "49,99€", "discount": "-30%", "stars": "★★★★☆", "reviews": "97" } },
-        { "type": "product", "settings": { "emoji": "🍖", "badge": "Natural", "badge_style": "b-new", "brand": "Perros & Gatos", "name": "Snacks naturales liofilizados de pollo 100% sin aditivos", "price": "8,99€", "stars": "★★★★★", "reviews": "412" } },
-        { "type": "product", "settings": { "emoji": "🛁", "brand": "Higiene", "name": "Kit grooming profesional: cepillo, cortaúñas y champú natural", "price": "29,99€", "old_price": "39,99€", "discount": "-25%", "stars": "★★★★★", "reviews": "156" } },
-        { "type": "product", "settings": { "emoji": "🛏️", "badge": "Premium", "badge_style": "b-new", "brand": "Descanso", "name": "Cama ortopédica memory foam lavable antideslizante", "price": "44,99€", "old_price": "64,99€", "discount": "-31%", "stars": "★★★★★", "reviews": "289" } },
-        { "type": "product", "settings": { "emoji": "🎾", "brand": "Juguetes", "name": "Set 10 juguetes interactivos dispensadores de premios", "price": "18,99€", "stars": "★★★★☆", "reviews": "201" } },
-        { "type": "product", "settings": { "emoji": "💧", "badge": "Top", "badge_style": "b-hot", "brand": "Alimentación", "name": "Fuente de agua con filtro recirculante silenciosa 2L", "price": "22,99€", "old_price": "31,99€", "discount": "-28%", "stars": "★★★★★", "reviews": "378" } }
-      ]
+      "name": "Productos destacados"
     }
   ]
 }
