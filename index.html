@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PAWLOVE — Tu Tienda de Mascotas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream: #FBF7F0;
+  --warm: #F5EDE0;
+  --brown: #3D2B1F;
+  --orange: #E8682A;
+  --orange2: #F5874A;
+  --green: #4A7C59;
+  --green2: #6AAF80;
+  --yellow: #F2C94C;
+  --pink: #F2A0A0;
+  --blue: #7EB8D4;
+  --gray: #9A8F87;
+  --dark: #2A1F1A;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--brown);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cur { position: fixed; width: 14px; height: 14px; background: var(--orange); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; }
+#cur2 { position: fixed; width: 38px; height: 38px; border: 2px solid rgba(232,104,42,.35); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: left .13s ease-out, top .13s ease-out; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+
+/* ANNOUNCE */
+.ann {
+  background: var(--brown);
+  color: var(--cream);
+  overflow: hidden; height: 38px;
+  display: flex; align-items: center;
+}
+.ann-t {
+  display: flex; gap: 48px; white-space: nowrap;
+  animation: mq 25s linear infinite;
+  font-size: 11px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.ann-t span::before { content: '🐾 '; }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251,247,240,.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(61,43,31,.08);
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--brown); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-paw { font-size: 22px; animation: waggle 2s ease-in-out infinite; display: inline-block; }
+@keyframes waggle { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+.logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-r { display: flex; gap: 14px; align-items: center; }
+.ni { background: none; border: none; font-size: 18px; cursor: none; transition: transform .2s; }
+.ni:hover { transform: scale(1.15); }
+.cart-wrap { position: relative; }
+.cbadge { position: absolute; top: -6px; right: -6px; background: var(--orange); color: #fff; font-size: 8px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+@media(max-width:767px) { .nav-links { display: none; } }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--warm);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+}
+@media(max-width:767px) { .hero { grid-template-columns: 1fr; } }
+.hero-left {
+  padding: clamp(40px,6vw,100px) clamp(24px,5vw,80px);
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange); color: #fff;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; padding: 7px 16px;
+  border-radius: 40px; margin-bottom: 24px;
+  animation: fadeUp .6s ease both;
+}
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7vw, 90px);
+  line-height: 1.0;
+  font-weight: 900;
+  color: var(--brown);
+  margin-bottom: 20px;
+  animation: fadeUp .7s .1s ease both;
+}
+.hero-h1 .italic { font-style: italic; color: var(--orange); }
+.hero-desc {
+  font-size: 15px; color: var(--gray);
+  line-height: 1.8; max-width: 420px;
+  margin-bottom: 36px;
+  animation: fadeUp .7s .2s ease both;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; border: none; border-radius: 50px; cursor: none; transition: all .25s; }
+.btn-o { background: var(--orange); color: #fff; }
+.btn-o:hover { background: var(--orange2); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,104,42,.35); }
+.btn-w { background: #fff; color: var(--brown); border: 1px solid rgba(61,43,31,.12); }
+.btn-w:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+.hero-trust { display: flex; align-items: center; gap: 16px; margin-top: 36px; animation: fadeUp .7s .4s ease both; }
+.trust-stars { color: var(--yellow); font-size: 18px; }
+.trust-text { font-size: 13px; color: var(--gray); }
+.trust-text strong { color: var(--brown); }
+
+.hero-right {
+  position: relative;
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+@media(max-width:767px) { .hero-right { height: 400px; } }
+.hero-blob {
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle at 40% 40%, var(--orange2) 0%, var(--yellow) 50%, var(--green2) 100%);
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  animation: blob 8s ease-in-out infinite;
+  opacity: .15;
+}
+@keyframes blob {
+  0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+  33% { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; }
+  66% { border-radius: 70% 30% 50% 50% / 40% 70% 30% 60%; }
+}
+.hero-emoji-field { position: absolute; inset: 0; pointer-events: none; }
+.hero-emoji-field span { position: absolute; font-size: 32px; animation: float var(--d,6s) ease-in-out infinite; animation-delay: var(--dl,0s); opacity: .6; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(8deg); } }
+.hero-main-emoji {
+  font-size: clamp(140px, 20vw, 220px);
+  position: relative; z-index: 2;
+  animation: bounce 3s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(232,104,42,.25));
+}
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+
+/* HANDWRITTEN accent */
+.handwrite { font-family: 'Caveat', cursive; font-size: 22px; color: var(--orange); transform: rotate(-2deg); display: inline-block; }
+
+/* STATS STRIP */
+.stats-strip {
+  background: var(--brown);
+  padding: 36px 24px;
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 24px; text-align: center;
+}
+@media(max-width:640px) { .stats-inner { grid-template-columns: repeat(2,1fr); } }
+.stat-n { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--orange); line-height: 1; }
+.stat-l { font-size: 12px; color: rgba(251,247,240,.5); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
+
+/* SECTION */
+.sec { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.sec-lbl { font-family: 'Caveat', cursive; font-size: 20px; color: var(--orange); margin-bottom: 8px; }
+.sec-h { font-family: 'Playfair Display', serif; font-size: clamp(36px,5vw,60px); font-weight: 900; line-height: 1.1; margin-bottom: 48px; }
+.sec-h span { color: var(--orange); font-style: italic; }
+
+/* CATEGORIES */
+.cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+@media(max-width:640px) { .cat-grid { grid-template-columns: repeat(2,1fr); } }
+@media(min-width:900px) { .cat-grid { grid-template-columns: repeat(6,1fr); } }
+.cat {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 16px 24px;
+  text-decoration: none; color: var(--brown);
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+  border: 2px solid transparent;
+  transition: all .3s;
+  box-shadow: 0 2px 16px rgba(61,43,31,.06);
+}
+.cat:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 12px 40px rgba(232,104,42,.15); }
+.cat-ico { font-size: 36px; }
+.cat-nm { font-size: 13px; font-weight: 600; }
+.cat-n { font-size: 11px; color: var(--gray); }
+
+/* PRODUCTS */
+.prod-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+@media(min-width:640px) { .prod-grid { grid-template-columns: repeat(3,1fr); } }
+@media(min-width:960px) { .prod-grid { grid-template-columns: repeat(4,1fr); } }
+.pc {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(61,43,31,.06);
+  transition: all .3s;
+  cursor: none;
+  position: relative;
+}
+.pc:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(61,43,31,.12); }
+.pc-img {
+  aspect-ratio: 1;
+  background: var(--warm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px;
+  position: relative; overflow: hidden;
+}
+.pc-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  padding: 4px 12px; border-radius: 20px;
+  text-transform: uppercase;
+}
+.b-new { background: var(--green); color: #fff; }
+.b-hot { background: var(--orange); color: #fff; }
+.b-sale { background: var(--pink); color: var(--brown); }
+.pc-wish {
+  position: absolute; top: 12px; right: 12px;
+  background: #fff; border-radius: 50%;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  cursor: none; transition: transform .2s;
+  border: none;
+}
+.pc-wish:hover { transform: scale(1.2); }
+.pc-add {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: var(--orange); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-align: center; padding: 11px;
+  transform: translateY(100%);
+  transition: transform .25s;
+  text-transform: uppercase;
+  text-decoration: none; display: block;
+  cursor: none;
+}
+.pc:hover .pc-add { transform: translateY(0); }
+.pc-info { padding: 16px; }
+.pc-brand { font-size: 10px; color: var(--orange); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+.pc-name { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 12px; color: var(--brown); }
+.pc-price { display: flex; align-items: baseline; gap: 8px; }
+.pp-cur { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--brown); }
+.pp-old { font-size: 12px; color: var(--gray); text-decoration: line-through; }
+.pp-save { font-size: 10px; font-weight: 700; color: var(--green); background: rgba(74,124,89,.1); padding: 2px 7px; border-radius: 10px; }
+.pc-stars { font-size: 11px; color: var(--yellow); margin-top: 7px; }
+.pc-stars span { color: var(--gray); }
+
+/* WHY US */
+.why-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+@media(min-width:768px) { .why-grid { grid-template-columns: repeat(4,1fr); } }
+.why-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(61,43,31,.06);
+  transition: transform .3s;
+}
+.why-card:hover { transform: translateY(-4px); }
+.why-ico { font-size: 36px; margin-bottom: 14px; }
+.why-t { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.why-d { font-size: 12px; color: var(--gray); line-height: 1.7; }
+
+/* REVIEWS */
+.rev-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media(min-width:640px) { .rev-grid { grid-template-columns: repeat(3,1fr); } }
+.rv {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 2px 16px rgba(61,43,31,.06);
+  position: relative;
+}
+.rv-q { font-family: 'Playfair Display', serif; font-size: 56px; color: var(--orange); opacity: .15; position: absolute; top: 12px; right: 20px; line-height: 1; }
+.rv-stars { color: var(--yellow); font-size: 14px; margin-bottom: 12px; }
+.rv-text { font-size: 13px; line-height: 1.8; color: #666; margin-bottom: 18px; }
+.rv-author { display: flex; align-items: center; gap: 10px; }
+.rv-av { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--warm); }
+.rv-nm { font-size: 13px; font-weight: 600; color: var(--brown); }
+.rv-loc { font-size: 11px; color: var(--gray); }
+.rv-ver { font-size: 10px; color: var(--green); margin-top: 1px; }
+
+/* PROMO */
+.promo-banner {
+  background: var(--brown);
+  border-radius: 28px;
+  padding: 56px 48px;
+  margin: 0 24px 80px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 40px;
+  position: relative; overflow: hidden;
+}
+@media(max-width:767px) { .promo-banner { grid-template-columns: 1fr; text-align: center; } }
+.promo-banner::before {
+  content: '🐾';
+  position: absolute; right: -20px; bottom: -30px;
+  font-size: 180px; opacity: .06; pointer-events: none;
+}
+.promo-lbl { font-family: 'Caveat', cursive; font-size: 22px; color: var(--orange); margin-bottom: 8px; }
+.promo-h { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,48px); font-weight: 900; color: var(--cream); line-height: 1.1; }
+.promo-h span { color: var(--orange); font-style: italic; }
+.promo-code-box { background: rgba(255,255,255,.08); border: 1px dashed rgba(255,255,255,.2); border-radius: 16px; padding: 20px 28px; text-align: center; }
+.promo-code-lbl { font-size: 11px; color: rgba(251,247,240,.5); letter-spacing: 2px; text-transform: uppercase; }
+.promo-code { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--orange); letter-spacing: 4px; margin: 6px 0; }
+.promo-code-desc { font-size: 12px; color: rgba(251,247,240,.5); }
+.promo-pct { font-family: 'Playfair Display', serif; font-size: clamp(64px,10vw,100px); font-weight: 900; color: var(--orange); line-height: 1; text-align: center; }
+.promo-pct small { display: block; font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(251,247,240,.5); font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+
+/* NEWSLETTER */
+.nl {
+  background: var(--warm);
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(61,43,31,.08);
+}
+.nl-h { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,52px); font-weight: 900; margin-bottom: 10px; }
+.nl-h span { color: var(--orange); font-style: italic; }
+.nl-s { color: var(--gray); font-size: 14px; margin-bottom: 32px; }
+.nl-form { display: flex; max-width: 440px; margin: 0 auto; border-radius: 50px; overflow: hidden; box-shadow: 0 4px 20px rgba(61,43,31,.1); }
+.nl-in { flex: 1; background: #fff; border: none; color: var(--brown); padding: 14px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none; }
+.nl-btn { background: var(--orange); color: #fff; border: none; cursor: none; padding: 14px 24px; font-size: 13px; font-weight: 600; transition: background .2s; white-space: nowrap; }
+.nl-btn:hover { background: var(--orange2); }
+
+/* FOOTER */
+footer { background: var(--brown); padding: 60px 24px 28px; }
+.foot-g { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 36px; }
+@media(min-width:768px) { .foot-g { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.foot-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--cream); margin-bottom: 12px; }
+.foot-logo span { color: var(--orange); }
+.foot-p { font-size: 13px; color: rgba(251,247,240,.5); line-height: 1.8; }
+.foot-col h4 { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.foot-col ul { list-style: none; }
+.foot-col li { margin-bottom: 10px; }
+.foot-col a { font-size: 13px; color: rgba(251,247,240,.5); text-decoration: none; transition: color .2s; }
+.foot-col a:hover { color: var(--cream); }
+.foot-bot { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: rgba(251,247,240,.35); }
+.socials { display: flex; gap: 10px; }
+.socials a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center; font-size: 15px; text-decoration: none; color: rgba(251,247,240,.5); transition: all .2s; }
+.socials a:hover { background: var(--orange); color: #fff; }
+
+/* REVEAL */
+.ra { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+.ra.on { opacity: 1; transform: translateY(0); }
+
+/* TOAST */
+.toast { position: fixed; bottom: 28px; right: 28px; background: var(--brown); color: var(--cream); font-size: 13px; font-weight: 600; padding: 14px 22px; border-radius: 50px; z-index: 999; transform: translateY(80px); opacity: 0; transition: all .4s; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 30px rgba(61,43,31,.3); }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+<div class="toast" id="toast">🐾 Añadido a favoritos</div>
+
+<!-- ANNOUNCE -->
+<div class="ann">
+  <div class="ann-t">
+    <span>Envío gratis +40€</span>
+    <span>Devolución 30 días</span>
+    <span>Productos naturales</span>
+    <span>+5.000 mascotas felices</span>
+    <span>Atención 24/7</span>
+    <span>Envío gratis +40€</span>
+    <span>Devolución 30 días</span>
+    <span>Productos naturales</span>
+    <span>+5.000 mascotas felices</span>
+    <span>Atención 24/7</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><span class="logo-paw">🐾</span>Paw<span>Love</span></a>
+  <ul class="nav-links">
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="ni">🔍</button>
+    <button class="ni">👤</button>
+    <div class="cart-wrap">
+      <button class="ni">🛒<span class="cbadge">0</span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">🐾 La tienda que tus mascotas merecen</div>
+    <h1 class="hero-h1">
+      Todo el amor<br>
+      para tu<br>
+      <span class="italic">mascota</span>
+    </h1>
+    <p class="hero-desc">Productos premium para perros, gatos, pájaros, conejos y más. Porque ellos lo dan todo, merecen lo mejor.</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn btn-o">Ver productos 🐾</a>
+      <a href="#categorias" class="btn btn-w">Explorar categorías</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-stars">★★★★★</div>
+      <div class="trust-text"><strong>4.9/5</strong> · Más de 5.000 clientes felices</div>
+    </div>
+    <div style="margin-top:24px">
+      <span class="handwrite">¡Tu mascota te lo agradecerá! 🐶</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-blob"></div>
+    <div class="hero-emoji-field">
+      <span style="top:10%;left:10%;--d:7s;--dl:0s">🦴</span>
+      <span style="top:15%;right:15%;--d:5s;--dl:.5s">⭐</span>
+      <span style="top:70%;left:8%;--d:8s;--dl:1s">🎾</span>
+      <span style="top:75%;right:10%;--d:6s;--dl:.3s">💕</span>
+      <span style="top:40%;left:5%;--d:9s;--dl:.8s">🌿</span>
+      <span style="top:50%;right:5%;--d:7s;--dl:1.2s">✨</span>
+    </div>
+    <div class="hero-main-emoji">🐶</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div><div class="stat-n">5K+</div><div class="stat-l">Clientes felices</div></div>
+    <div><div class="stat-n">200+</div><div class="stat-l">Productos</div></div>
+    <div><div class="stat-n">4.9★</div><div class="stat-l">Valoración media</div></div>
+    <div><div class="stat-n">30d</div><div class="stat-l">Devolución gratis</div></div>
+  </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<div id="categorias" style="background:var(--cream)">
+  <div class="sec ra">
+    <div class="sec-lbl">Explora por animal</div>
+    <h2 class="sec-h">Encuentra lo que<br>necesita tu <span>compañero</span></h2>
+    <div class="cat-grid">
+      <a href="#" class="cat"><div class="cat-ico">🐶</div><div class="cat-nm">Perros</div><div class="cat-n">80+ productos</div></a>
+      <a href="#" class="cat"><div class="cat-ico">🐱</div><div class="cat-nm">Gatos</div><div class="cat-n">65+ productos</div></a>
+      <a href="#" class="cat"><div class="cat-ico">🐦</div><div class="cat-nm">Pájaros</div><div class="cat-n">30+ productos</div></a>
+      <a href="#" class="cat"><div class="cat-ico">🐹</div><div class="cat-nm">Roedores</div><div class="cat-n">24+ productos</div></a>
+      <a href="#" class="cat"><div class="cat-ico">🐇</div><div class="cat-nm">Conejos</div><div class="cat-n">18+ productos</div></a>
+      <a href="#" class="cat"><div class="cat-ico">🐠</div><div class="cat-nm">Peces</div><div class="cat-n">22+ productos</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<div id="productos" style="background:var(--warm)">
+  <div class="sec ra">
+    <div class="sec-lbl">Los más populares</div>
+    <h2 class="sec-h">Productos que <span>encantan</span></h2>
+    <div class="prod-grid">
+
+      <div class="pc">
+        <div class="pc-img">
+          💩
+          <div class="pc-badge b-hot">Más vendido</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Perros</div>
+          <div class="pc-name">Recogedor de caca portátil con dispensador de bolsas</div>
+          <div class="pc-price">
+            <span class="pp-cur">12,99€</span>
+            <span class="pp-old">19,99€</span>
+            <span class="pp-save">-35%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(248 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🦮
+          <div class="pc-badge b-new">Nuevo</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Perros</div>
+          <div class="pc-name">Arnés antipull ajustable reflectante paseo nocturno</div>
+          <div class="pc-price">
+            <span class="pp-cur">24,99€</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(183 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🐱
+          <div class="pc-badge b-sale">Oferta</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Gatos</div>
+          <div class="pc-name">Rascador tower con plataformas + juguete colgante</div>
+          <div class="pc-price">
+            <span class="pp-cur">34,99€</span>
+            <span class="pp-old">49,99€</span>
+            <span class="pp-save">-30%</span>
+          </div>
+          <div class="pc-stars">★★★★☆ <span>(97 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🍖
+          <div class="pc-badge b-new">Natural</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Perros & Gatos</div>
+          <div class="pc-name">Snacks naturales liofilizados de pollo 100% sin aditivos</div>
+          <div class="pc-price">
+            <span class="pp-cur">8,99€</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(412 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🛁
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Higiene</div>
+          <div class="pc-name">Kit grooming profesional: cepillo, cortaúñas y champú natural</div>
+          <div class="pc-price">
+            <span class="pp-cur">29,99€</span>
+            <span class="pp-old">39,99€</span>
+            <span class="pp-save">-25%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(156 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🛏️
+          <div class="pc-badge b-new">Premium</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Descanso</div>
+          <div class="pc-name">Cama ortopédica memory foam lavable antideslizante</div>
+          <div class="pc-price">
+            <span class="pp-cur">44,99€</span>
+            <span class="pp-old">64,99€</span>
+            <span class="pp-save">-31%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(289 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          🎾
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Juguetes</div>
+          <div class="pc-name">Set 10 juguetes interactivos dispensadores de premios</div>
+          <div class="pc-price">
+            <span class="pp-cur">18,99€</span>
+          </div>
+          <div class="pc-stars">★★★★☆ <span>(201 reseñas)</span></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-img">
+          💧
+          <div class="pc-badge b-hot">Top</div>
+          <button class="pc-wish" onclick="showToast('❤️ Guardado en favoritos')">🤍</button>
+          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
+        </div>
+        <div class="pc-info">
+          <div class="pc-brand">Alimentación</div>
+          <div class="pc-name">Fuente de agua con filtro recirculante silenciosa 2L</div>
+          <div class="pc-price">
+            <span class="pp-cur">22,99€</span>
+            <span class="pp-old">31,99€</span>
+            <span class="pp-save">-28%</span>
+          </div>
+          <div class="pc-stars">★★★★★ <span>(378 reseñas)</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:44px">
+      <a href="#" class="btn btn-o">Ver todos los productos 🐾</a>
+    </div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<div id="nosotros" style="background:var(--cream)">
+  <div class="sec ra">
+    <div class="sec-lbl">¿Por qué PawLove?</div>
+    <h2 class="sec-h">Pensado para<br><span>ellos y para ti</span></h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-ico">🚀</div><div class="why-t">Envío rápido</div><div class="why-d">Recibe tu pedido en casa en pocos días. Gratis en pedidos +40€</div></div>
+      <div class="why-card"><div class="why-ico">🌿</div><div class="why-t">Productos naturales</div><div class="why-d">Seleccionamos productos seguros, naturales y testados por veterinarios</div></div>
+      <div class="why-card"><div class="why-ico">↩️</div><div class="why-t">30 días devolución</div><div class="why-d">Si no queda contento, te devolvemos el dinero sin preguntas</div></div>
+      <div class="why-card"><div class="why-ico">💬</div><div class="why-t">Soporte experto</div><div class="why-d">Nuestro equipo de amantes de mascotas te ayuda siempre que necesites</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div style="background:var(--warm)">
+  <div class="sec ra">
+    <div class="sec-lbl">Lo que dicen nuestros clientes</div>
+    <h2 class="sec-h">Más de <span>5.000 mascotas</span><br>felices</h2>
+    <div class="rev-grid">
+      <div class="rv">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">El recogedor de caca es increíble, muy práctico y ligero. Mi perro y yo lo usamos cada día. Llegó super rápido y bien embalado.</p>
+        <div class="rv-author"><div class="rv-av">🧑</div><div><div class="rv-nm">Carlos M.</div><div class="rv-loc">Madrid · Dueño de Labrador</div><div class="rv-ver">✓ Compra verificada</div></div></div>
+      </div>
+      <div class="rv">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">La cama ortopédica para mi gata mayor ha sido un antes y un después. Duerme muchísimo mejor y se nota que le duele menos la cadera.</p>
+        <div class="rv-author"><div class="rv-av">👩</div><div><div class="rv-nm">Lucía R.</div><div class="rv-loc">Barcelona · Dueña de gata senior</div><div class="rv-ver">✓ Compra verificada</div></div></div>
+      </div>
+      <div class="rv">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Los snacks naturales son buenísimos, mi perro los adora y sé que son sanos. El servicio al cliente es excelente, respondieron enseguida.</p>
+        <div class="rv-author"><div class="rv-av">🧔</div><div><div class="rv-nm">Andreu P.</div><div class="rv-loc">Valencia · Dueño de Border Collie</div><div class="rv-ver">✓ Compra verificada</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO -->
+<div id="ofertas">
+  <div class="promo-banner ra">
+    <div>
+      <div class="promo-lbl">Oferta de bienvenida ✨</div>
+      <div class="promo-h">Tu primera compra<br>con <span>descuento</span></div>
+      <a href="#" class="btn btn-o" style="margin-top:24px">Comprar ahora →</a>
+    </div>
+    <div class="promo-pct">10%<small>de descuento</small></div>
+    <div class="promo-code-box">
+      <div class="promo-code-lbl">Usa el código</div>
+      <div class="promo-code">PAWLOVE10</div>
+      <div class="promo-code-desc">En tu primera compra · Sin mínimo</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="nl ra" id="contacto">
+  <h2 class="nl-h">Únete a la familia<br><span>PawLove</span> 🐾</h2>
+  <p class="nl-s">Recibe ofertas exclusivas, consejos para tu mascota y novedades antes que nadie</p>
+  <div class="nl-form">
+    <input class="nl-in" type="email" placeholder="tu@email.com"/>
+    <button class="nl-btn">🐾 Suscribirme</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-g">
+    <div>
+      <div class="foot-logo">Paw<span>Love</span> 🐾</div>
+      <p class="foot-p">La tienda de confianza para los que aman a sus mascotas. Productos premium, precios justos y mucho amor.</p>
+      <div class="socials" style="margin-top:20px">
+        <a href="#">𝕏</a><a href="#">📸</a><a href="#">▶️</a><a href="#">💬</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Novedades</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 PawLove. Todos los derechos reservados.</span>
+    <span style="color:rgba(232,104,42,.4)">🐾 Hecho con amor para las mascotas</span>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const c=document.getElementById('cur'),r=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){c.style.left=mx+'px';c.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(tick)})();
+
+// Reveal
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.1});
+document.querySelectorAll('.ra').forEach(e=>obs.observe(e));
+
+// Toast
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+window.showToast=showToast;
+</script>
+</body>
+</html>
