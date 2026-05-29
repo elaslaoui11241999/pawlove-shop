@@ -1,156 +1,71 @@
 <div id="productos" style="background:var(--warm)">
-  <div class="sec ra">
+  <div class="sec">
     <div class="sec-lbl">Los más populares</div>
     <h2 class="sec-h">Productos que <span>encantan</span></h2>
     <div class="prod-grid">
 
-      <div class="pc">
-        <div class="pc-img">
-          💩
-          <div class="pc-badge b-hot">Más vendido</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Perros</div>
-          <div class="pc-name">Recogedor de caca portátil con dispensador de bolsas</div>
-          <div class="pc-price">
-            <span class="pp-cur">12,99€</span>
-            <span class="pp-old">19,99€</span>
-            <span class="pp-save">-35%</span>
-          </div>
-          <div class="pc-stars">★★★★★ <span>(248 reseñas)</span></div>
-        </div>
-      </div>
+      {% assign source = collections.all %}
+      {% if section.settings.collection != blank %}
+        {% assign source = collections[section.settings.collection] %}
+      {% endif %}
 
-      <div class="pc">
-        <div class="pc-img">
-          🦮
-          <div class="pc-badge b-new">Nuevo</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Perros</div>
-          <div class="pc-name">Arnés antipull ajustable reflectante paseo nocturno</div>
-          <div class="pc-price">
-            <span class="pp-cur">24,99€</span>
-          </div>
-          <div class="pc-stars">★★★★★ <span>(183 reseñas)</span></div>
-        </div>
-      </div>
+      {% for product in source.products limit: 8 %}
+        <div class="pc">
+          <div class="pc-img" style="font-size:0">
 
-      <div class="pc">
-        <div class="pc-img">
-          🐱
-          <div class="pc-badge b-sale">Oferta</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Gatos</div>
-          <div class="pc-name">Rascador tower con plataformas + juguete colgante</div>
-          <div class="pc-price">
-            <span class="pp-cur">34,99€</span>
-            <span class="pp-old">49,99€</span>
-            <span class="pp-save">-30%</span>
-          </div>
-          <div class="pc-stars">★★★★☆ <span>(97 reseñas)</span></div>
-        </div>
-      </div>
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | img_url: '500x500', crop: 'center' }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                style="width:100%;height:100%;object-fit:cover"
+                loading="lazy"
+              >
+            {% else %}
+              <span style="font-size:64px">🛒</span>
+            {% endif %}
 
-      <div class="pc">
-        <div class="pc-img">
-          🍖
-          <div class="pc-badge b-new">Natural</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Perros &amp; Gatos</div>
-          <div class="pc-name">Snacks naturales liofilizados de pollo 100% sin aditivos</div>
-          <div class="pc-price">
-            <span class="pp-cur">8,99€</span>
-          </div>
-          <div class="pc-stars">★★★★★ <span>(412 reseñas)</span></div>
-        </div>
-      </div>
+            {% if product.compare_at_price > product.price %}
+              <div class="pc-badge b-sale">Oferta</div>
+            {% elsif product.created_at > 'now' | date: '%s' | minus: 2592000 %}
+              <div class="pc-badge b-new">Nuevo</div>
+            {% endif %}
 
-      <div class="pc">
-        <div class="pc-img">
-          🛁
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Higiene</div>
-          <div class="pc-name">Kit grooming profesional: cepillo, cortaunas y champu natural</div>
-          <div class="pc-price">
-            <span class="pp-cur">29,99€</span>
-            <span class="pp-old">39,99€</span>
-            <span class="pp-save">-25%</span>
-          </div>
-          <div class="pc-stars">★★★★★ <span>(156 reseñas)</span></div>
-        </div>
-      </div>
+            <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
 
-      <div class="pc">
-        <div class="pc-img">
-          🛏️
-          <div class="pc-badge b-new">Premium</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Descanso</div>
-          <div class="pc-name">Cama ortopedica memory foam lavable antideslizante</div>
-          <div class="pc-price">
-            <span class="pp-cur">44,99€</span>
-            <span class="pp-old">64,99€</span>
-            <span class="pp-save">-31%</span>
-          </div>
-          <div class="pc-stars">★★★★★ <span>(289 reseñas)</span></div>
-        </div>
-      </div>
+            <a href="{{ product.url }}" class="pc-add">
+              {% if product.available %}
+                🛒 Ver producto
+              {% else %}
+                Sin stock
+              {% endif %}
+            </a>
 
-      <div class="pc">
-        <div class="pc-img">
-          🎾
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Juguetes</div>
-          <div class="pc-name">Set 10 juguetes interactivos dispensadores de premios</div>
-          <div class="pc-price">
-            <span class="pp-cur">18,99€</span>
           </div>
-          <div class="pc-stars">★★★★☆ <span>(201 reseñas)</span></div>
-        </div>
-      </div>
-
-      <div class="pc">
-        <div class="pc-img">
-          💧
-          <div class="pc-badge b-hot">Top</div>
-          <button class="pc-wish" onclick="showToast('Guardado en favoritos')">🤍</button>
-          <a href="#" class="pc-add">🐾 Añadir al carrito</a>
-        </div>
-        <div class="pc-info">
-          <div class="pc-brand">Alimentacion</div>
-          <div class="pc-name">Fuente de agua con filtro recirculante silenciosa 2L</div>
-          <div class="pc-price">
-            <span class="pp-cur">22,99€</span>
-            <span class="pp-old">31,99€</span>
-            <span class="pp-save">-28%</span>
+          <div class="pc-info">
+            <div class="pc-brand">{{ product.type | default: 'Producto' }}</div>
+            <div class="pc-name">{{ product.title }}</div>
+            <div class="pc-price">
+              <span class="pp-cur">{{ product.price | money }}</span>
+              {% if product.compare_at_price > product.price %}
+                <span class="pp-old">{{ product.compare_at_price | money }}</span>
+                {% assign saved_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                <span class="pp-save">-{{ saved_pct }}%</span>
+              {% endif %}
+            </div>
+            {% if product.metafields.reviews.rating != blank %}
+              <div class="pc-stars">★★★★★ <span>({{ product.metafields.reviews.rating_count }} reseñas)</span></div>
+            {% endif %}
           </div>
-          <div class="pc-stars">★★★★★ <span>(378 reseñas)</span></div>
         </div>
-      </div>
+      {% else %}
+        <p style="color:var(--gray);grid-column:1/-1;text-align:center;padding:40px">
+          Añade productos en tu panel de Shopify para verlos aquí.
+        </p>
+      {% endfor %}
 
     </div>
     <div style="text-align:center;margin-top:44px">
-      <a href="#categorias" class="btn btn-o">Ver todos los productos</a>
+      <a href="{{ routes.collections_url }}/all" class="btn btn-o">Ver todos los productos 🛒</a>
     </div>
   </div>
 </div>
@@ -158,7 +73,13 @@
 {% schema %}
 {
   "name": "Featured Products",
-  "settings": [],
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Coleccion a mostrar (opcional, por defecto todos)"
+    }
+  ],
   "presets": [
     {
       "name": "Featured Products"
