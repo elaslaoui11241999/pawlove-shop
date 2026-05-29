@@ -9,11 +9,6 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   requestAnimationFrame(tick);
 })();
 
-// Scroll reveal
-const obs = new IntersectionObserver(en => {
-  en.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-}, { threshold: .1 });
-document.querySelectorAll('.ra').forEach(e => obs.observe(e));
 
 // Toast notification
 function showToast(msg) {
